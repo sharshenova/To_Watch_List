@@ -6,6 +6,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div class="alert alert-primary" role="alert">
+          A simple primary alert—check it out!
+        </div>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
