@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Task from './Task/Task';
+//import AddTaskForm from "./AddTaskForm/AddTaskForm"
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div class="alert alert-primary" role="alert">
-          A simple primary alert—check it out!
-        </div>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+	state = {
+		tasks: [
+			{id: 1, text: 'To clean up'},
+			{id: 2, text: 'To do HW'},
+			{id: 3, text: 'To call sister'}
+		],
+		currentTask: {text: ''},
+	};
+
+	render() {
+		return (
+			<div className="App">
+				<div>
+					{
+						this.state.tasks.map((task) => {
+							return <Task key={task.id} id={task.id} text={task.text}/>
+							}
+						)
+					}
+				</div>
+			</div>
+		)
+	}
+
+};
 
 export default App;
