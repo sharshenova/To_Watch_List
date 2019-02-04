@@ -30,6 +30,20 @@ class App extends Component {
 				this.setState({currentTask: {text: ''}})
 	};
 
+	deleteTask = (id) => {
+		let taskId = this.state.tasks.findIndex(task => {
+				return task.id === id;
+		});
+
+		const tasks = [...this.state.tasks];
+		tasks.splice(taskId, 1);
+
+		this.setState({
+				...this.state,
+				tasks
+		});
+	};
+
 	render() {
 		return (
 			<div className="App">
@@ -44,6 +58,7 @@ class App extends Component {
 								key={task.id} 
 								id={task.id}
 								text={task.text}
+								delete={this.deleteTask}
 							/>
 						}
 						)
