@@ -29,9 +29,8 @@ class App extends Component {
 		tasks.forEach(task => {
 			if (task.id === id) {
 				task.text = event.target.value;
-			} else {
+				console.log("обновлено")
 			}
-
 		});
 
 		this.setState({tasks: tasks});
@@ -100,7 +99,6 @@ class App extends Component {
 			</div>
 		)
 	}
-
 };
 
 export default App;
