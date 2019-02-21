@@ -6,12 +6,18 @@ import AddTaskForm from "./AddTaskForm/AddTaskForm"
 
 class App extends Component {
 	state = {
-		tasks: [
-			{id: 1, text: 'To clean up'},
-			{id: 2, text: 'To do HW'},
-			{id: 3, text: 'To call sister'}
-		],
+		tasks: [],
 		currentTask: {text: ''},
+	};
+
+	componentDidMount() {
+		// получаем сохраненные элементы из localStorage
+		const savedTasks = localStorage.getItem("savedTasks");
+		if (savedTasks) {
+			console.log(savedTasks);
+			const tasks = JSON.parse(savedTasks);
+			this.setState({tasks: tasks});
+		}
 	};
 
 	addTaskToCurrent = (event) => {
@@ -19,15 +25,18 @@ class App extends Component {
 	};
 
 	addTask = () => {
-				const newTask = this.state.currentTask;
-				const tasks = [...this.state.tasks];
+		const newTask = this.state.currentTask;
+		const tasks = [...this.state.tasks];
 
-				var now = new Date();
-				var new_id = now.getTime();
+		var now = new Date();
+		var new_id = now.getTime();
 
-				tasks.push({id: new_id, text: newTask.text});
-				this.setState({tasks});
-				this.setState({currentTask: {text: ''}})
+		tasks.push({id: new_id, text: newTask.text});
+
+		this.setState({tasks});
+		this.setState({currentTask: {text: ''}});
+		// сохраняем элементы в localStorage
+		localStorage.setItem('savedTasks', JSON.stringify(tasks));
 	};
 
 	deleteTask = (id) => {
@@ -42,7 +51,10 @@ class App extends Component {
 				...this.state,
 				tasks
 		});
+		// сохраняем элементы в localStorage
+		localStorage.setItem('savedTasks', JSON.stringify(tasks));		
 	};
+
 
 	render() {
 		return (
