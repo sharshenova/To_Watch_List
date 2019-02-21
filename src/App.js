@@ -22,7 +22,7 @@ class App extends Component {
 		};
 	};
 
-
+	// обновление элемента
 	updateTask = (event, id) => {
 		const tasks = [...this.state.tasks];
 
