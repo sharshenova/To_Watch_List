@@ -5,10 +5,12 @@ import AddTaskForm from "./AddTaskForm/AddTaskForm"
 
 
 class App extends Component {
+
 	state = {
 		tasks: [],
 		currentTask: {text: ''},
 	};
+
 
 	componentDidMount() {
 		// получаем сохраненные элементы из localStorage
@@ -17,8 +19,26 @@ class App extends Component {
 			console.log(savedTasks);
 			const tasks = JSON.parse(savedTasks);
 			this.setState({tasks: tasks});
-		}
+		};
 	};
+
+
+	updateTask = (event, id) => {
+		const tasks = [...this.state.tasks];
+
+		tasks.forEach(task => {
+			if (task.id === id) {
+				task.text = event.target.value;
+			} else {
+			}
+
+		});
+
+		this.setState({tasks: tasks});
+		// сохраняем элементы в localStorage
+		localStorage.setItem('savedTasks', JSON.stringify(tasks));
+	};
+
 
 	addTaskToCurrent = (event) => {
 			 this.setState({currentTask: {text: event.target.value}});
@@ -71,6 +91,7 @@ class App extends Component {
 								id={task.id}
 								text={task.text}
 								delete={this.deleteTask}
+								change={this.updateTask}
 							/>
 						}
 						)
